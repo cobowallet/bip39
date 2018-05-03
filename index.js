@@ -1,7 +1,7 @@
 var Buffer = require('safe-buffer').Buffer
 var createHash = require('create-hash')
 var pbkdf2 = require('pbkdf2').pbkdf2Sync
-var randomBytes = require('randombytes')
+var randomBytes = require('crypto').randomBytes
 
 // use unorm until String.prototype.normalize gets better browser support
 var unorm = require('unorm')
