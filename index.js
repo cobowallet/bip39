@@ -1,7 +1,7 @@
 var Buffer = require('safe-buffer').Buffer
 var createHash = require('create-hash')
 var pbkdf2 = require('pbkdf2').pbkdf2Sync
-var randomBytes = require('crypto').randomBytes
+var randomBytes = require('react-native-randombytes').randomBytes
 
 // use unorm until String.prototype.normalize gets better browser support
 var unorm = require('unorm')
@@ -113,11 +113,19 @@ function entropyToMnemonic (entropy, wordlist) {
 }
 
 function generateMnemonic (strength, rng, wordlist) {
-  strength = strength || 128
-  if (strength % 32 !== 0) throw new TypeError(INVALID_ENTROPY)
-  rng = rng || randomBytes
+  return new Promise((resolve, reject) => {
+    strength = strength || 128
+    if (strength % 32 !== 0) reject(new TypeError(INVALID_ENTROPY))
+    rng = rng || randomBytes
 
-  return entropyToMnemonic(rng(strength / 8), wordlist)
+    rng(strength / 8, (error, bytes) => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(entropyToMnemonic(bytes.toString('hex'), wordlist))
+      }
+    })
+  })
 }
 
 function validateMnemonic (mnemonic, wordlist) {
