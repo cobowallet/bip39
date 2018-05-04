@@ -122,7 +122,7 @@ function generateMnemonic (strength, rng, wordlist) {
       if (error) {
         reject(error)
       } else {
-        resolve(entropyToMnemonic(bytes.toString('hex'), wordlist))
+        resolve(entropyToMnemonic(bytes, wordlist))
       }
     })
   })
