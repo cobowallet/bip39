@@ -96,7 +96,7 @@ function entropyToMnemonic (entropy, wordlist) {
 
   // 128 <= ENT <= 256
   if (entropy.length < 16) throw new TypeError(INVALID_ENTROPY)
-  if (entropy.length > 32) throw new TypeError(INVALID_ENTROPY)
+  if (entropy.length > 320) throw new TypeError(INVALID_ENTROPY)
   if (entropy.length % 4 !== 0) throw new TypeError(INVALID_ENTROPY)
 
   var entropyBits = bytesToBinary([].slice.call(entropy))
