@@ -80,7 +80,7 @@ function mnemonicToEntropy (mnemonic, wordlist) {
   // calculate the checksum and compare
   var entropyBytes = entropyBits.match(/(.{1,8})/g).map(binaryToByte)
   if (entropyBytes.length < 16) throw new Error(INVALID_ENTROPY)
-  if (entropyBytes.length > 32) throw new Error(INVALID_ENTROPY)
+  if (entropyBytes.length > 320) throw new Error(INVALID_ENTROPY)
   if (entropyBytes.length % 4 !== 0) throw new Error(INVALID_ENTROPY)
 
   var entropy = Buffer.from(entropyBytes)
